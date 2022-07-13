@@ -1,23 +1,55 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { Row } from 'antd';
+import Color from './pages/Color';
+import Typography from './pages/Typography';
+import Icon from './pages/Icon';
+import Component from './pages/Component';
+import Header from './components/Header';
 
 function App() {
+  const routes = [
+    {
+      to: ['/color', '/'],
+      component: <Color />,
+      exact: true
+    },
+    {
+      to: '/typography',
+      component: <Typography />
+    },
+    {
+      to: '/icon',
+      component: <Icon />
+    },
+    {
+      to: '/component',
+      component: <Component />
+    }
+  ];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Row>
+          <Header />
+          <Router>
+            <Switch>
+              {
+                routes.map((route) => 
+                  <Route path={route.to} exact={route.exact}>
+                    {
+                      route.component
+                    }
+                  </Route>
+                )
+              }
+            </Switch>
+          </Router>
+        </Row>
     </div>
   );
 }
