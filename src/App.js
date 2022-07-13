@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { Row } from 'antd';
+import { Row, Button } from 'antd';
 import Color from './pages/Color';
 import Typography from './pages/Typography';
 import Icon from './pages/Icon';
@@ -36,6 +36,9 @@ function App() {
     <div className="App">
         <Row>
           <Header />
+          <Button type="primary">
+            Primary
+          </Button>
           <Router>
             <Switch>
               {

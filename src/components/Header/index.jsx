@@ -1,5 +1,11 @@
+import { Row } from 'antd';
+
 const Header = () => {
-    return <div>Header</div>;
+    return (
+        <Row>
+            
+        </Row>
+    );
 }
 
 export default Header;
