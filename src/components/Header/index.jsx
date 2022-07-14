@@ -11,7 +11,7 @@ const StyledCol = styled(Col)`
 
 const Header = ({ title }) => {
   return (
-    <StyledCol span={24} className="header">
+    <StyledCol span={24}>
       <Col span={7} size={24} color={"white"} style={{ height: "100%" }}>
         <Col span={24} className={styles.header}>
           <Typography size="24px">{title}</Typography>
