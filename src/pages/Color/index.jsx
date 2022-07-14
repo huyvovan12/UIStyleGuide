@@ -1,6 +1,10 @@
+import { Col } from 'antd';
+
 const Color = () => {
     return (
-        <div>Color</div>
+        <Col span={24} >
+            <div>Color</div>
+        </Col>
     )
 };
 export default Color;

@@ -1,58 +1,50 @@
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import { Row, Button } from 'antd';
-import Color from './pages/Color';
-import Typography from './pages/Typography';
-import Icon from './pages/Icon';
-import Component from './pages/Component';
-import Header from './components/Header';
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Row } from "antd";
+import Color from "./pages/Color";
+import Typography from "./pages/Typography";
+import Icon from "./pages/Icon";
+import Component from "./pages/Component";
+import Header from "./components/Header";
 
 function App() {
   const routes = [
     {
-      to: ['/color', '/'],
+      to: "/typography",
+      component: <Typography />,
+      exact: true,
+    },
+    {
+      to: "/icon",
+      component: <Icon />,
+    },
+    {
+      to: "/component",
+      component: <Component />,
+    },
+    {
+      to: ["/color", "/"],
       component: <Color />,
-      exact: true
+      exact: true,
     },
-    {
-      to: '/typography',
-      component: <Typography />
-    },
-    {
-      to: '/icon',
-      component: <Icon />
-    },
-    {
-      to: '/component',
-      component: <Component />
-    }
   ];
 
   return (
     <div className="App">
-        <Row>
-          <Header />
-          <Button type="primary">
-            Primary
-          </Button>
-          <Router>
-            <Switch>
-              {
-                routes.map((route) => 
-                  <Route path={route.to} exact={route.exact}>
-                    {
-                      route.component
-                    }
-                  </Route>
-                )
-              }
-            </Switch>
-          </Router>
-        </Row>
+      <Row>
+        <Router>
+          <Header title="Ui Style Guide" />
+          <Switch>
+            {routes.map((route) => {
+              return (
+                <Route path={route.to} exact={route.exact}>
+                  {route.component}
+                </Route>
+              );
+            })}
+          </Switch>
+        </Router>
+      </Row>
     </div>
   );
 }
