@@ -1,17 +1,28 @@
-import { UserOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { UserOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 import styles from "./index.module.sass";
+import { useEffect, useRef, useState } from "react";
 
-const FormItem = ({ placeholder, ...props }) => {
+export const InputBase = styled(Input)`
+  ${({ $height }) =>
+    $height &&
+    `
+      height: ${$height};
+    `}
+`;
+
+export const PasswordInput = ({ placeholder, ...rest }) => {
+  const inputRef = useRef("");
   const [value, setValue] = useState("");
-  const inputRef = useRef();
   useEffect(() => {
+    console.log(value);
     if (value.trim() !== "") {
       inputRef.current.className = `${styles.input} ${styles.active}`;
     } else {
       inputRef.current.className = `${styles.input}`;
     }
+    console.log(inputRef.className);
   }, [value]);
 
   return (
@@ -19,15 +30,13 @@ const FormItem = ({ placeholder, ...props }) => {
       <div className={styles.icon}>
         <UserOutlined className="site-form-item-icon" />
       </div>
-      <Input
-        placeholder={placeholder || "placeholder"}
+      <InputBase
         className={styles["input_field"]}
+        placeholder={placeholder || "placeholder"}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        {...props}
+        {...rest}
       />
     </div>
   );
 };
-
-export default FormItem;
