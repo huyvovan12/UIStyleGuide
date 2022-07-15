@@ -60,7 +60,7 @@ const Button = ({ size, primary, secondary, disabled, children, ...props }) => {
   const StyledButton = styled(antdButton)`
     font-weight: 700;
     font-size: 16px;
-    height: 48px;
+    height: 40px;
     width: ${size ? size : "90%"};
     ${buttonTheme};
   `;
