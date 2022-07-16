@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import * as Yup from "yup";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string()
@@ -19,7 +19,7 @@ const Component = () => {
   `;
   return (
     <Col span={24} style={{ display: "flex" }}>
-      <ColStyled span={3}>
+      {/* <ColStyled span={3}>
         <Typography color="red">Components</Typography>
       </ColStyled>
       <Col span={8}>
@@ -41,31 +41,27 @@ const Component = () => {
             Click Me!
           </Button>
         </ColStyled>
-        {/* <ColStyled span={24}>
-          <Input placeholder="123" title="Họ và tên" />
-        </ColStyled> */}
-        {/* <ColStyled span={24}>
-          <Input $type="password" placeholder="Password" />
-        </ColStyled> */}
+      </Col> */}
+      <Col span={6}>
+        <Formik
+          initialValues={{
+            user: "",
+          }}
+          onSubmit={(values) => {
+            console.log(values);
+          }}
+          validationSchema={SignupSchema}
+        >
+          {() => {
+            return (
+              <Form>
+                <Input title="user name" name="user" placeholder="UserName" />
+                <button type="submit">Submit</button>
+              </Form>
+            );
+          }}
+        </Formik>
       </Col>
-      {/* <Formik
-        initialValues={{
-          user: "",
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
-      >
-        {() => {
-          return (
-            <Form>
-              <Input title="user name" name="user" placeholder="UserName" />
-              <button type="submit">Submit</button>
-            </Form>
-          );
-        }}
-      </Formik> */}
     </Col>
   );
 };
