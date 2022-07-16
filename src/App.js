@@ -37,7 +37,11 @@ function App() {
           <Switch>
             {routes.map((route) => {
               return (
-                <Route path={route.to} exact={route.exact}>
+                <Route
+                  path={route.to}
+                  exact={route.exact}
+                  key={route.component}
+                >
                   {route.component}
                 </Route>
               );

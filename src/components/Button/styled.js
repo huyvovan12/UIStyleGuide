@@ -34,10 +34,12 @@ export const ButtonPrimary = styled(ButtonBase)`
     color: #ffffff;
     background: #c20000;
   }
-  :disabled {
-    color: #ffffff;
-    background: #999999;
-  }
+  ${({ disabled }) =>
+    disabled &&
+    `
+    color: #ffffff !important;
+    background: #999999 !important;
+    `}
 `;
 
 export const ButtonSecondary = styled(ButtonBase)`
@@ -60,9 +62,11 @@ export const ButtonSecondary = styled(ButtonBase)`
     background: #fff;
     border: 3px solid #ff0000;
   }
-  :disabled {
-    color: #999999;
-    background: #fff;
-    border: 1px solid #999999;
-  }
+  ${({ disabled }) =>
+    disabled &&
+    `
+    color: #999999 !important;
+    background: #fff !important;
+    border: 1px solid #999999 !important;
+    `}
 `;

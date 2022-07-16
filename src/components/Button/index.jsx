@@ -23,7 +23,12 @@ const Button = ({ $type, $width, disabled, $height, ...rest }) => {
       );
     default:
       return (
-        <ButtonPrimary $width={$width} disabled={disabled} $height={$height} />
+        <ButtonPrimary
+          $width={$width}
+          disabled={disabled}
+          $height={$height}
+          {...rest}
+        />
       );
   }
 };
