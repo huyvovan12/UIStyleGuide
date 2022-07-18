@@ -49,7 +49,7 @@ export const IconArea = styled.div`
   justify-content: center;
   border-right: 1px solid #c1c1c1;
   color: #c1c1c1;
-  width: 42px !important;
+  width: 48px;
   transition: 0.4s;
 
   ${InputArea}:hover & {
@@ -77,11 +77,12 @@ export const IconArea = styled.div`
     `}
 `;
 
-export const Title = styled.div`
+export const Title = styled.label`
   font-size: 14px;
   font-weight: 700;
   color: #333333;
   margin-bottom: 3px;
+  cursor: pointer;
 `;
 
 export const InputBase = styled(Input)`

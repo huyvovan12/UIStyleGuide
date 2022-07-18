@@ -1,14 +1,14 @@
 import PrimaryInput from "./PrimaryInput";
 import SecondaryInput from "./SecondaryInput";
 
-const Input = ({ $type, placeholder, name, ...rest }) => {
+const Input = ({ $type, placeholder, ...rest }) => {
   switch ($type) {
     case "primary":
-      return <PrimaryInput name={name} placeholder={placeholder} {...rest} />;
+      return <PrimaryInput placeholder={placeholder} {...rest} />;
     case "secondary":
-      return <SecondaryInput name={name} placeholder={placeholder} {...rest} />;
+      return <SecondaryInput placeholder={placeholder} {...rest} />;
     default:
-      return <SecondaryInput placeholder={placeholder} name={name} {...rest} />;
+      return <SecondaryInput placeholder={placeholder} {...rest} />;
   }
 };
 

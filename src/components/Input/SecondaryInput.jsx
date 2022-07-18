@@ -3,18 +3,19 @@ import { InputBase, InputArea, ErrorMessage, Title } from "./styled";
 
 const SecondaryInput = ({
   title,
-  name = "",
+  name = "name",
   $width = "100%",
   $height,
   placeholder = "Placeholder",
   ...rest
 }) => {
   const [field, meta] = useField(name);
-  const $active = field.value !== "";
-  console.log($width);
+  const $active =
+    field.value !== "" && field.value !== null && field.value !== undefined;
+
   return (
     <>
-      {title && <Title>{title}</Title>}
+      {title && <Title htmlFor="input_secondary">{title}</Title>}
       <InputArea
         $active={$active}
         $error={!!meta.error}
@@ -25,6 +26,7 @@ const SecondaryInput = ({
           placeholder={placeholder}
           $active={$active}
           $error={!!meta.error}
+          id="input_secondary"
           {...field}
           {...rest}
         />

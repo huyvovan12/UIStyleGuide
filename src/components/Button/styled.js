@@ -55,12 +55,12 @@ export const ButtonSecondary = styled(ButtonBase)`
   }
   :visited {
     color: #ff0000;
-    border: 3px solid #ff0000;
+    border: 2px solid #ff0000;
   }
   :focus {
     color: #ff0000;
     background: #fff;
-    border: 3px solid #ff0000;
+    border: 2px solid #ff0000;
   }
   ${({ disabled }) =>
     disabled &&

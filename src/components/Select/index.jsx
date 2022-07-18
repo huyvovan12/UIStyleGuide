@@ -1,19 +1,37 @@
-import { CustomSelect } from "./styled";
+import { Container, CustomOption, CustomSelect, ErrorMessage } from "./styled";
 import { DownOutlined } from "@ant-design/icons";
 import { useState } from "react";
-
-const Select = ({ children, name, $width }) => {
-  //   const [field, meta] = useField("name");
+export const Select = ({
+  children,
+  errorMessage,
+  name,
+  $width,
+  $height,
+  error,
+  ...rest
+}) => {
   const [rotate, setRotate] = useState(0);
   return (
-    <CustomSelect
-      onClick={() => setRotate(rotate + 180)}
-      suffixIcon={<DownOutlined rotate={rotate} />}
-      $width={$width}
-    >
-      {children}
-    </CustomSelect>
+    <Container id="container" onClick={() => setRotate(rotate + 180)}>
+      <CustomSelect
+        getPopupContainer={() => document.getElementById("container")}
+        $width={$width}
+        suffixIcon={<DownOutlined rotate={rotate} />}
+        onChange={(value) => console.log(value)}
+        error={error}
+        {...rest}
+      >
+        {children}
+      </CustomSelect>
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </Container>
   );
 };
 
-export default Select;
+export const Option = ({ children, $width, $value, ...rest }) => {
+  return (
+    <CustomOption value={$value} $width={$width} $height {...rest}>
+      {children}
+    </CustomOption>
+  );
+};

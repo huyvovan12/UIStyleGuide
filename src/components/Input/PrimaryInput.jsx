@@ -1,33 +1,41 @@
 import { useField } from "formik";
 import { InputBase, InputArea, IconArea, ErrorMessage, Title } from "./styled";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
+import { useEffect, useRef } from "react";
 
 const PrimaryInput = ({
-  title,
-  name = "",
+  label,
+  name,
   placeholder = "Placeholder",
   icon = <UserOutlined />,
   $width = "100%",
   $height = "48px",
   ...rest
 }) => {
-  const [field, meta] = useField(name);
-  const $active = field.value !== "";
+  const refField = useRef(
+    Math.random()
+      .toString(36)
+      .replace(/[^a-z]+/g, "")
+  );
+  const [field, meta] = useField(name ?? refField.current);
+
+  const $active =
+    field?.value !== "" && field?.value !== null && field?.value !== undefined;
   return (
     <>
-      {title && <Title>{title}</Title>}
+      {label && <Title htmlFor={name}>{label}</Title>}
       <InputArea
         $active={$active}
-        $error={!!meta.error}
+        $error={!!meta?.error}
         $width={$width}
         $height={$height}
       >
-        <IconArea $active={$active} $error={!!meta.error}>
+        <IconArea $active={$active} $error={!!meta?.error}>
           {icon}
         </IconArea>
-        <InputBase placeholder={placeholder} {...field} {...rest} />
+        <InputBase placeholder={placeholder} id={name} {...field} {...rest} />
       </InputArea>
-      {meta.error && meta.touched && (
+      {meta?.error && meta?.touched && (
         <ErrorMessage className="error-message">{meta.error}</ErrorMessage>
       )}
     </>
