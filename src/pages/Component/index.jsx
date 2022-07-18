@@ -5,6 +5,8 @@ import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
+// import Select from "../../components/Select";
+import Select from "../../components/Select";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string()
@@ -19,12 +21,15 @@ const Component = () => {
   `;
   return (
     <Col span={24} style={{ display: "flex" }}>
-      {/* <ColStyled span={3}>
+      <ColStyled span={3}>
         <Typography color="red">Components</Typography>
       </ColStyled>
       <Col span={8}>
         <ColStyled span={24}>
-          <Button $type="secondary" $width="300px">
+          <Select $width="90%"></Select>
+        </ColStyled>
+        <ColStyled span={24}>
+          <Button $type="secondary" $width="200px">
             Click Me!
           </Button>
         </ColStyled>
@@ -41,7 +46,7 @@ const Component = () => {
             Click Me!
           </Button>
         </ColStyled>
-      </Col> */}
+      </Col>
       <Col span={6}>
         <Formik
           initialValues={{
@@ -55,8 +60,15 @@ const Component = () => {
           {() => {
             return (
               <Form>
-                <Input title="user name" name="user" placeholder="UserName" />
-                <button type="submit">Submit</button>
+                <Input
+                  $type="primary"
+                  name="user"
+                  placeholder="UserName"
+                  $width="500px"
+                />
+                <Button htmlType="submit" $type="primary" $width="200px">
+                  Click!
+                </Button>
               </Form>
             );
           }}

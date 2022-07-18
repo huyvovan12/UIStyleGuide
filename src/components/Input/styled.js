@@ -4,11 +4,9 @@ import styled from "styled-components";
 export const InputArea = styled.div`
   display: flex;
   border: 1px solid #c1c1c1;
-  height: 48px;
   border-radius: 8px;
   overflow: hidden;
   transition: 0.4s;
-  width: 100%;
 
   :hover {
     border: 1px solid #333333;
@@ -17,7 +15,16 @@ export const InputArea = styled.div`
   :focus-within {
     border: 1px solid #333333;
   }
-
+  ${({ $width }) =>
+    $width &&
+    `
+    width: ${$width};
+    `}
+  ${({ $height }) =>
+    $height &&
+    `
+    height: ${$height};
+    `}
   ${({ $active }) =>
     $active &&
     `
@@ -42,7 +49,7 @@ export const IconArea = styled.div`
   justify-content: center;
   border-right: 1px solid #c1c1c1;
   color: #c1c1c1;
-  width: 50px;
+  width: 42px !important;
   transition: 0.4s;
 
   ${InputArea}:hover & {
@@ -83,6 +90,9 @@ export const InputBase = styled(Input)`
   transition: 0.4s;
   color: #333333;
   font-weight: 700;
+  :focus {
+    box-shadow: none;
+  }
   ::placeholder {
     font-size: 16px;
     font-weight: 400;

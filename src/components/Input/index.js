@@ -1,17 +1,15 @@
-import { NormalInput, IconInput } from "./CustomInput";
+import PrimaryInput from "./PrimaryInput";
+import SecondaryInput from "./SecondaryInput";
 
 const Input = ({ $type, placeholder, name, ...rest }) => {
-  if ($type === "user" || $type === "password") {
-    return (
-      <IconInput
-        $type={$type}
-        name={name}
-        placeholder={placeholder}
-        {...rest}
-      />
-    );
+  switch ($type) {
+    case "primary":
+      return <PrimaryInput name={name} placeholder={placeholder} {...rest} />;
+    case "secondary":
+      return <SecondaryInput name={name} placeholder={placeholder} {...rest} />;
+    default:
+      return <SecondaryInput placeholder={placeholder} name={name} {...rest} />;
   }
-  return <NormalInput name={name} placeholder={placeholder} {...rest} />;
 };
 
 export default Input;
