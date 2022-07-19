@@ -1,9 +1,9 @@
-import { useField } from "formik";
+import { useState } from "react";
 import { InputBase, InputArea, ErrorMessage, Title } from "./styled";
 
 const SecondaryInput = ({
   label,
-  name = "name",
+  name,
   $width = "100%",
   $height,
   $error,
@@ -11,25 +11,23 @@ const SecondaryInput = ({
   placeholder = "Placeholder",
   ...rest
 }) => {
-  const [field] = useField(name);
-  const $active =
-    field.value !== "" && field.value !== null && field.value !== undefined;
+  const [value, setValue] = useState(null);
 
   return (
     <>
       {label && <Title htmlFor="input_secondary">{label}</Title>}
       <InputArea
-        $active={$active}
+        $active={!!value}
         $error={$error}
         $width={$width}
         $height={$height}
       >
         <InputBase
           placeholder={placeholder}
-          $active={$active}
+          $active={!!value}
           $error={$error}
           id="input_secondary"
-          {...field}
+          onChange={(e) => setValue(e.target.value)}
           {...rest}
         />
       </InputArea>

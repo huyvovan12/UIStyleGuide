@@ -23,7 +23,7 @@ function App() {
       component: <Component />,
     },
     {
-      to: ["/color", "/"],
+      to: ["/form", "/"],
       component: <Color />,
       exact: true,
     },
