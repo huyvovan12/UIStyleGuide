@@ -18,9 +18,8 @@ const PrimaryInput = ({
       .replace(/[^a-z]+/g, "")
   );
   const [field, meta] = useField(name ?? refField.current);
-
   const $active =
-    field?.value !== "" && field?.value !== null && field?.value !== undefined;
+    field.value !== "" && field.value !== null && field.value !== undefined;
   return (
     <>
       {label && <Title htmlFor={name}>{label}</Title>}
@@ -35,7 +34,7 @@ const PrimaryInput = ({
         </IconArea>
         <InputBase placeholder={placeholder} id={name} {...field} {...rest} />
       </InputArea>
-      {meta?.error && meta?.touched && (
+      {meta.error && meta.touched && (
         <ErrorMessage className="error-message">{meta.error}</ErrorMessage>
       )}
     </>

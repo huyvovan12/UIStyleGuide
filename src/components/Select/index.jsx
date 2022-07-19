@@ -1,15 +1,7 @@
 import { Container, CustomOption, CustomSelect, ErrorMessage } from "./styled";
 import { DownOutlined } from "@ant-design/icons";
 import { useState } from "react";
-export const Select = ({
-  children,
-  errorMessage,
-  name,
-  $width,
-  $height,
-  error,
-  ...rest
-}) => {
+export const Select = ({ children, errorMessage, $width, error, ...rest }) => {
   const [rotate, setRotate] = useState(0);
   return (
     <Container id="container" onClick={() => setRotate(rotate + 180)}>
@@ -17,8 +9,8 @@ export const Select = ({
         getPopupContainer={() => document.getElementById("container")}
         $width={$width}
         suffixIcon={<DownOutlined rotate={rotate} />}
-        onChange={(value) => console.log(value)}
         error={error}
+        defaultValue="123"
         {...rest}
       >
         {children}

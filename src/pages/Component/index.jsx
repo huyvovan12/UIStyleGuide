@@ -56,6 +56,7 @@ const Component = () => {
         <Formik
           initialValues={{}}
           validationSchema={Yup.object({
+            user: Yup.string().required("Required"),
             name: Yup.string().required("Required"),
           })}
           onSubmit={(values) => {
