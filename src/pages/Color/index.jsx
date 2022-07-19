@@ -136,42 +136,44 @@ const Color = () => {
                     onChange={(value) => setFieldValue("rangepicker", value)}
                   />
                 </div>
-                <FieldArray
-                  name="friends"
-                  render={(arrayHelpers) => (
-                    <div>
-                      {values.friends && values.friends.length > 0 ? (
-                        values.friends.map((friend, index) => (
-                          <div key={index}>
-                            <Field
-                              name={`friends.${index}`}
-                              defaultValue={friend}
-                            />
-                            <button
-                              type="button"
-                              onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                            >
-                              -
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
-                            >
-                              +
-                            </button>
-                          </div>
-                        ))
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={() => arrayHelpers.push("")}
-                        >
-                          Add a friend
-                        </button>
-                      )}
-                    </div>
-                  )}
-                />
+                <div style={{ height: "100px" }}>
+                  <FieldArray
+                    name="friends"
+                    render={(arrayHelpers) => (
+                      <div>
+                        {values.friends && values.friends.length > 0 ? (
+                          values.friends.map((friend, index) => (
+                            <div key={index}>
+                              <Field
+                                name={`friends.${index}`}
+                                defaultValue={friend}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                              >
+                                -
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
+                              >
+                                +
+                              </button>
+                            </div>
+                          ))
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => arrayHelpers.push("")}
+                          >
+                            Add a friend
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  />
+                </div>
                 <div style={{ height: "100px" }}>
                   <Button htmlType="submit" $type="primary" $width="200px">
                     Click!
