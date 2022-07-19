@@ -1,7 +1,7 @@
 import { useField } from "formik";
 import { InputBase, InputArea, IconArea, ErrorMessage, Title } from "./styled";
 import { UserOutlined } from "@ant-design/icons";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const PrimaryInput = ({
   label,
@@ -10,6 +10,8 @@ const PrimaryInput = ({
   icon = <UserOutlined />,
   $width = "100%",
   $height = "48px",
+  $error,
+  errorMessage,
   ...rest
 }) => {
   const refField = useRef(
@@ -17,25 +19,25 @@ const PrimaryInput = ({
       .toString(36)
       .replace(/[^a-z]+/g, "")
   );
-  const [field, meta] = useField(name ?? refField.current);
+  const [field] = useField(name ?? refField.current);
   const $active =
     field.value !== "" && field.value !== null && field.value !== undefined;
   return (
     <>
       {label && <Title htmlFor={name}>{label}</Title>}
       <InputArea
-        $active={$active}
-        $error={!!meta?.error}
+        $error={$error}
         $width={$width}
         $height={$height}
+        $active={$active}
       >
-        <IconArea $active={$active} $error={!!meta?.error}>
+        <IconArea $error={$error} $active={$active}>
           {icon}
         </IconArea>
         <InputBase placeholder={placeholder} id={name} {...field} {...rest} />
       </InputArea>
-      {meta.error && meta.touched && (
-        <ErrorMessage className="error-message">{meta.error}</ErrorMessage>
+      {errorMessage && (
+        <ErrorMessage className="error-message">{errorMessage}</ErrorMessage>
       )}
     </>
   );

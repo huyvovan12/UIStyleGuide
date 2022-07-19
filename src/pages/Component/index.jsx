@@ -54,14 +54,18 @@ const Component = () => {
       </Col>
       <Col span={6} style={{ marginLeft: "30px" }}>
         <Formik
-          initialValues={{}}
+          initialValues={{
+            user: "",
+            name: "",
+          }}
           validationSchema={Yup.object({
             user: Yup.string().required("Required"),
-            name: Yup.string().required("Required"),
+            name: Yup.number().max(4, "max < 4").required("Required"),
           })}
           onSubmit={(values) => {
             console.log(values);
           }}
+          validateOnChange={false}
         >
           {({ setFieldValue, errors }) => {
             return (
@@ -73,13 +77,18 @@ const Component = () => {
                   icon={<LockOutlined />}
                   $width="200px"
                   label="họ và tên"
+                  onBlur={(e) => setFieldValue("user", e.target.value)}
+                  $error={!!errors.user}
+                  errorMessage={errors.user}
                 />
                 <Select
-                  $width="300px"
-                  $height="100px"
+                  $width="150px"
+                  $height="30px"
                   name="name"
+                  placeholder="chọn tuổi"
+                  label="Chọn tuổi"
                   onChange={(value) => setFieldValue("name", value)}
-                  error={!!errors.name}
+                  $error={!!errors.name}
                   errorMessage={errors.name}
                 >
                   {array.map((e) => (
