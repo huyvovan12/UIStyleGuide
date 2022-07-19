@@ -1,7 +1,7 @@
 import { Checkbox, Col, DatePicker, Row, TimePicker, Typography } from "antd";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { Formik, Form } from "formik";
+import { Formik, Form, FieldArray, Field } from "formik";
 // import Select from "../../components/Select";
 import { Select, Option } from "../../components/Select";
 import { LockOutlined } from "@ant-design/icons";
@@ -38,7 +38,7 @@ const Color = () => {
     >
       <div
         style={{
-          height: "80vh",
+          height: "90vh",
           width: "400px",
           border: "3px solid black",
           borderRadius: "8px",
@@ -48,19 +48,13 @@ const Color = () => {
         }}
       >
         <Formik
-          initialValues={{}}
-          validationSchema={Yup.object({
-            input: Yup.string().required("Vui lòng điền họ và tên!"),
-            select: Yup.number()
-              .max(4, "Số tuổi bé hơn 5")
-              .required("Vui lòng chọn tuổi!"),
-          })}
+          initialValues={{ friends: ["jared", "ian", "brent"] }}
           onSubmit={(values) => {
             console.log(values);
           }}
           validateOnChange={false}
         >
-          {({ setFieldValue, errors }) => {
+          {({ setFieldValue, errors, values }) => {
             return (
               <Form>
                 <Title> Form </Title>
@@ -142,6 +136,42 @@ const Color = () => {
                     onChange={(value) => setFieldValue("rangepicker", value)}
                   />
                 </div>
+                <FieldArray
+                  name="friends"
+                  render={(arrayHelpers) => (
+                    <div>
+                      {values.friends && values.friends.length > 0 ? (
+                        values.friends.map((friend, index) => (
+                          <div key={index}>
+                            <Field
+                              name={`friends.${index}`}
+                              defaultValue={friend}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                            >
+                              -
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
+                            >
+                              +
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.push("")}
+                        >
+                          Add a friend
+                        </button>
+                      )}
+                    </div>
+                  )}
+                />
                 <div style={{ height: "100px" }}>
                   <Button htmlType="submit" $type="primary" $width="200px">
                     Click!

@@ -1,7 +1,13 @@
-import { useField } from "formik";
-import { InputBase, InputArea, IconArea, ErrorMessage, Title } from "./styled";
+import {
+  InputBase,
+  InputArea,
+  IconArea,
+  ErrorMessage,
+  Title,
+  Container,
+} from "./styled";
 import { UserOutlined } from "@ant-design/icons";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const PrimaryInput = ({
   label,
@@ -16,7 +22,7 @@ const PrimaryInput = ({
 }) => {
   const [value, setValue] = useState(null);
   return (
-    <>
+    <Container>
       {label && <Title htmlFor={name}>{label}</Title>}
       <InputArea
         $error={$error}
@@ -37,7 +43,7 @@ const PrimaryInput = ({
       {errorMessage && (
         <ErrorMessage className="error-message">{errorMessage}</ErrorMessage>
       )}
-    </>
+    </Container>
   );
 };
 

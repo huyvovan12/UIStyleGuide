@@ -124,3 +124,5 @@ export const ErrorMessage = styled.div`
   font-size: 12px;
   font-weight: 700;
 `;
+
+export const Container = styled.div``;

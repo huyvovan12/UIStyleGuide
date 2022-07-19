@@ -6,7 +6,7 @@ import {
   Label,
 } from "./styled";
 import { DownOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 export const Select = ({
   children,
   errorMessage,
@@ -17,16 +17,17 @@ export const Select = ({
   ...rest
 }) => {
   const [rotate, setRotate] = useState(0);
+  const idRef = useRef(Math.random());
   return (
     <Container id="container" onClick={() => setRotate(rotate + 180)}>
-      {label && <Label htmlFor="select">{label}</Label>}
+      {label && <Label htmlFor={idRef.current}>{label}</Label>}
       <CustomSelect
         getPopupContainer={() => document.getElementById("container")}
         $width={$width}
         $height={$height}
         suffixIcon={<DownOutlined rotate={rotate} />}
         $error={$error}
-        id="select"
+        id={idRef.current}
         {...rest}
       >
         {children}
