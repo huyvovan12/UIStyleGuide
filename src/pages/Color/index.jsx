@@ -1,23 +1,14 @@
-import {
-  Checkbox,
-  Col,
-  DatePicker,
-  Radio,
-  Row,
-  TimePicker,
-  Typography,
-} from "antd";
+import { Checkbox, Col, DatePicker, Radio, TimePicker } from "antd";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { Formik, Form, FieldArray, Field } from "formik";
-// import Select from "../../components/Select";
-import { Select, Option } from "../../components/Select";
+import { Formik, Form, FieldArray } from "formik";
+import { Select } from "../../components/Select";
 import { LockOutlined } from "@ant-design/icons";
+
 import moment from "moment";
-import * as Yup from "yup";
 import Label from "../../components/Helpers/Label";
 import ErrorMessage from "../../components/Helpers/ErrorMessage";
-const { Title } = Typography;
+import { Container } from "../../components/Input/styled";
 const Color = () => {
   const helperTime = (value1, value2) => {
     return [
@@ -60,13 +51,19 @@ const Color = () => {
     >
       <div>
         <Formik
-          initialValues={{ friends: ["jared", "ian", "brent"] }}
+          initialValues={{
+            friends: [
+              { key: 1, value: "jet" },
+              { key: 2, value: "ian" },
+              { key: 3, value: "brent" },
+            ],
+          }}
           onSubmit={(values) => {
             console.log(values);
           }}
           validateOnChange={false}
         >
-          {({ setFieldValue, errors, values }) => {
+          {({ setFieldValue, errors, values, handleChange }) => {
             return (
               <Form>
                 <div style={{ height: "70px" }}>
@@ -77,7 +74,7 @@ const Color = () => {
                     icon={<LockOutlined />}
                     $width="200px"
                     label="họ và tên"
-                    onBlur={(e) => setFieldValue("input", e.target.value)}
+                    onChange={handleChange("input")}
                     $error={!!errors.input}
                     errorMessage={errors.input}
                   />
@@ -88,31 +85,19 @@ const Color = () => {
                     $height="48px"
                     placeholder="chọn tuổi"
                     label="Chọn tuổi"
-                    onChange={(value) => setFieldValue("select", value)}
+                    onChange={handleChange("select")}
                     $error={!!errors.select}
                     errorMessage={errors.select}
-                  >
-                    {array.map((e) => (
-                      <Option value={e.value} key={e.value}>
-                        {e.label}
-                      </Option>
-                    ))}
-                  </Select>
+                    options={array}
+                  />
                 </div>
                 <div style={{ height: "70px" }}>
                   <Label>Checkbox</Label>
                   <Checkbox.Group
                     style={{ width: "100%" }}
                     onChange={(e) => setFieldValue("checkbox", e)}
-                  >
-                    <Row>
-                      {array.map((ele) => (
-                        <Col span={8}>
-                          <Checkbox value={ele.value}>{ele.label}</Checkbox>
-                        </Col>
-                      ))}
-                    </Row>
-                  </Checkbox.Group>
+                    options={array}
+                  />
                   {errors.checkbox && (
                     <ErrorMessage>{errors.checkbox}</ErrorMessage>
                   )}
@@ -198,15 +183,18 @@ const Color = () => {
                     render={(arrayHelpers) => (
                       <>
                         {values.friends && values.friends.length > 0 ? (
-                          values.friends.map((_, index) => (
-                            <div key={index} style={{ display: "flex" }}>
+                          values.friends.map((item, index) => (
+                            <Container
+                              key={item.key}
+                              style={{ display: "flex" }}
+                            >
                               <Input
                                 $width="60%"
-                                value={values.friends?.[index]}
+                                value={values.friends?.[index].value}
                                 placeholder=""
-                                onChange={(value) =>
-                                  setFieldValue(`friends.${index}`, value)
-                                }
+                                onChange={handleChange(
+                                  `friends.${index}.value`
+                                )}
                               />
                               <Button
                                 type="button"
@@ -224,7 +212,7 @@ const Color = () => {
                               >
                                 +
                               </Button>
-                            </div>
+                            </Container>
                           ))
                         ) : (
                           <Button
