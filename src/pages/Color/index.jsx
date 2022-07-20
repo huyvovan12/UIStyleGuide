@@ -1,4 +1,12 @@
-import { Checkbox, Col, DatePicker, Row, TimePicker, Typography } from "antd";
+import {
+  Checkbox,
+  Col,
+  DatePicker,
+  Radio,
+  Row,
+  TimePicker,
+  Typography,
+} from "antd";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { Formik, Form, FieldArray, Field } from "formik";
@@ -7,8 +15,22 @@ import { Select, Option } from "../../components/Select";
 import { LockOutlined } from "@ant-design/icons";
 import moment from "moment";
 import * as Yup from "yup";
+import Label from "../../components/Helpers/Label";
+import ErrorMessage from "../../components/Helpers/ErrorMessage";
 const { Title } = Typography;
 const Color = () => {
+  const helperTime = (value1, value2) => {
+    return [
+      moment(value1).format("ss:mm:hh"),
+      moment(value2).format("ss:mm:hh"),
+    ];
+  };
+  const helperDate = (value1, value2) => {
+    return [
+      moment(value1).format("DD/MM/YYYY"),
+      moment(value2).format("DD/MM/YYYY"),
+    ];
+  };
   const array = [
     {
       label: "1",
@@ -36,17 +58,7 @@ const Color = () => {
         alignItems: "center",
       }}
     >
-      <div
-        style={{
-          height: "90vh",
-          width: "400px",
-          border: "3px solid black",
-          borderRadius: "8px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <div>
         <Formik
           initialValues={{ friends: ["jared", "ian", "brent"] }}
           onSubmit={(values) => {
@@ -57,8 +69,7 @@ const Color = () => {
           {({ setFieldValue, errors, values }) => {
             return (
               <Form>
-                <Title> Form </Title>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
                   <Input
                     $type="primary"
                     name="input"
@@ -71,7 +82,7 @@ const Color = () => {
                     errorMessage={errors.input}
                   />
                 </div>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
                   <Select
                     $width="200px"
                     $height="48px"
@@ -88,93 +99,146 @@ const Color = () => {
                     ))}
                   </Select>
                 </div>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
+                  <Label>Checkbox</Label>
                   <Checkbox.Group
                     style={{ width: "100%" }}
                     onChange={(e) => setFieldValue("checkbox", e)}
                   >
                     <Row>
-                      <Col span={8}>
-                        <Checkbox value="A">A</Checkbox>
-                      </Col>
-                      <Col span={8}>
-                        <Checkbox value="B">B</Checkbox>
-                      </Col>
-                      <Col span={8}>
-                        <Checkbox value="C">C</Checkbox>
-                      </Col>
-                      <Col span={8}>
-                        <Checkbox value="D">D</Checkbox>
-                      </Col>
-                      <Col span={8}>
-                        <Checkbox value="E">E</Checkbox>
-                      </Col>
+                      {array.map((ele) => (
+                        <Col span={8}>
+                          <Checkbox value={ele.value}>{ele.label}</Checkbox>
+                        </Col>
+                      ))}
                     </Row>
                   </Checkbox.Group>
+                  {errors.checkbox && (
+                    <ErrorMessage>{errors.checkbox}</ErrorMessage>
+                  )}
                 </div>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
+                  <Label>Radio Button</Label>
+                  <br />
+                  <Radio.Group
+                    options={array}
+                    onChange={(e) =>
+                      setFieldValue("RadioButton", e.target.value)
+                    }
+                  />
+                  {errors.RadioButton && (
+                    <ErrorMessage>{errors.RadioButton}</ErrorMessage>
+                  )}
+                </div>
+                <div style={{ height: "70px" }}>
+                  <Label>Date Picker</Label>
+                  <br />
                   <DatePicker
-                    format={"YYYY/MM/DD"}
+                    format={"DD/MM/YYYY"}
                     onChange={(value) =>
                       setFieldValue(
                         "datepicker",
-                        moment(value, "YYYY/MM/DD")._d
+                        moment(value._d).format("DD/MM/YYYY")
                       )
                     }
                   />
+                  {errors.datepicker && (
+                    <ErrorMessage>{errors.datepicker}</ErrorMessage>
+                  )}
                 </div>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
+                  <Label>Time Picker</Label>
+                  <br />
                   <TimePicker
-                    size="large"
                     onChange={(value) =>
-                      setFieldValue("timepicker", moment(value)._d)
+                      setFieldValue(
+                        "timepicker",
+                        moment(value._d).format("ss:mm:hh")
+                      )
                     }
                   />
+                  {errors.timepicker && (
+                    <ErrorMessage>{errors.timepicker}</ErrorMessage>
+                  )}
                 </div>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
+                  <Label>Range Time Picker</Label>
+                  <br />
                   <TimePicker.RangePicker
-                    onChange={(value) => setFieldValue("rangepicker", value)}
+                    onChange={(value) =>
+                      setFieldValue(
+                        "RangeTimePicker",
+                        helperTime(value[0]._d, value[1]._d)
+                      )
+                    }
                   />
+                  {errors.RangeTimePicker && (
+                    <ErrorMessage>{errors.RangeTimePicker}</ErrorMessage>
+                  )}
                 </div>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
+                  <Label>Range Date Picker</Label>
+                  <br />
+                  <DatePicker.RangePicker
+                    format="DD/MM/YYYY"
+                    onChange={(value) =>
+                      setFieldValue(
+                        "RangeDatePicker",
+                        helperDate(value[0]._d, value[1]._d)
+                      )
+                    }
+                  />
+                  {errors.RangeDatePicker && (
+                    <ErrorMessage>{errors.RangeDatePicker}</ErrorMessage>
+                  )}
+                </div>
+                <div style={{ height: "150px" }}>
                   <FieldArray
                     name="friends"
                     render={(arrayHelpers) => (
-                      <div>
+                      <>
                         {values.friends && values.friends.length > 0 ? (
-                          values.friends.map((friend, index) => (
-                            <div key={index}>
-                              <Field
-                                name={`friends.${index}`}
-                                defaultValue={friend}
+                          values.friends.map((_, index) => (
+                            <div key={index} style={{ display: "flex" }}>
+                              <Input
+                                $width="60%"
+                                value={values.friends?.[index]}
+                                placeholder=""
+                                onChange={(value) =>
+                                  setFieldValue(`friends.${index}`, value)
+                                }
                               />
-                              <button
+                              <Button
                                 type="button"
+                                $width="40px"
+                                $height="40px"
                                 onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
                               >
                                 -
-                              </button>
-                              <button
+                              </Button>
+                              <Button
                                 type="button"
+                                $width="40px"
+                                $height="40px"
                                 onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
                               >
                                 +
-                              </button>
+                              </Button>
                             </div>
                           ))
                         ) : (
-                          <button
+                          <Button
                             type="button"
                             onClick={() => arrayHelpers.push("")}
                           >
                             Add a friend
-                          </button>
+                          </Button>
                         )}
-                      </div>
+                      </>
                     )}
                   />
                 </div>
-                <div style={{ height: "100px" }}>
+                <div style={{ height: "70px" }}>
                   <Button htmlType="submit" $type="primary" $width="200px">
                     Click!
                   </Button>

@@ -7,7 +7,7 @@ import {
   Container,
 } from "./styled";
 import { UserOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PrimaryInput = ({
   label,
@@ -17,10 +17,23 @@ const PrimaryInput = ({
   $width = "100%",
   $height = "48px",
   $error,
+  onChange,
   errorMessage,
   ...rest
 }) => {
   const [value, setValue] = useState(null);
+  const [isChanged, setIsChanged] = useState(false);
+
+  const handleChange = (e) => {
+    setIsChanged(true);
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (onChange) {
+      isChanged && onChange(value);
+    }
+  }, [isChanged, value]);
   return (
     <Container>
       {label && <Title htmlFor={name}>{label}</Title>}
@@ -36,7 +49,7 @@ const PrimaryInput = ({
         <InputBase
           placeholder={placeholder}
           id={name}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleChange}
           {...rest}
         />
       </InputArea>

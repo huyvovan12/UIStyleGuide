@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { InputBase, InputArea, ErrorMessage, Title } from "./styled";
 
 const SecondaryInput = ({
@@ -9,9 +9,22 @@ const SecondaryInput = ({
   $error,
   errorMessage,
   placeholder = "Placeholder",
+  onChange,
   ...rest
 }) => {
   const [value, setValue] = useState(null);
+  const [isChanged, setIsChanged] = useState(false);
+
+  const handleChange = (e) => {
+    setIsChanged(true);
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (onChange) {
+      isChanged && onChange(value);
+    }
+  }, [isChanged, value]);
 
   return (
     <>
@@ -27,7 +40,7 @@ const SecondaryInput = ({
           $active={!!value}
           $error={$error}
           id="input_secondary"
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleChange}
           {...rest}
         />
       </InputArea>
