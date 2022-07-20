@@ -1,13 +1,14 @@
-import { NormalInput, PasswordInput, UserInput } from "./CustomInput";
+import PrimaryInput from "./PrimaryInput";
+import SecondaryInput from "./SecondaryInput";
 
-const Input = ({ $type, placeholder, name, ...rest }) => {
+const Input = ({ $type, placeholder, ...rest }) => {
   switch ($type) {
-    case "password":
-      return <PasswordInput name={name} placeholder={placeholder} {...rest} />;
-    case "user":
-      return <UserInput name={name} placeholder={placeholder} {...rest} />;
+    case "primary":
+      return <PrimaryInput placeholder={placeholder} {...rest} />;
+    case "secondary":
+      return <SecondaryInput placeholder={placeholder} {...rest} />;
     default:
-      return <NormalInput name={name} placeholder={placeholder} {...rest} />;
+      return <SecondaryInput placeholder={placeholder} {...rest} />;
   }
 };
 

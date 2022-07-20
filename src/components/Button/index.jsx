@@ -1,7 +1,14 @@
 import React from "react";
 import { ButtonPrimary, ButtonSecondary } from "./styled";
 
-const Button = ({ $type, $width, disabled, $height, ...rest }) => {
+const Button = ({
+  $type,
+  $width = " 100%",
+  disabled,
+  $height,
+  type,
+  ...rest
+}) => {
   switch ($type) {
     case "primary":
       return (
