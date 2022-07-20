@@ -1,23 +1,30 @@
-import { Col } from "antd";
-import styled from "styled-components";
-import Typography from "../Typography";
-import styles from "./index.module.sass";
+import Button from "../Button";
+import Input from "../Input";
+import { HeaderCol } from "./styled";
 
-const StyledCol = styled(Col)`
-  color: yellow;
-  height: 109px;
-  background-color: #ff0000;
-`;
-
-const Header = ({ title }) => {
+const Header = () => {
   return (
-    <StyledCol span={24}>
-      <Col span={7} size={24} color={"white"} style={{ height: "100%" }}>
-        <Col span={24} className={styles.header}>
-          <Typography size="24px">{title}</Typography>
-        </Col>
-      </Col>
-    </StyledCol>
+    <HeaderCol span={24}>
+      <HeaderCol span={7}>
+        <Button $type="secondary" $width="90%">
+          Create New Task
+        </Button>
+      </HeaderCol>
+      <HeaderCol span={17} style={{ justifyContent: "flex-end" }}>
+        <Input
+          placeholder={"Type something to search"}
+          $width="500px"
+          $height="40px"
+        />
+        <Button
+          $type="secondary"
+          $width="100px"
+          style={{ marginRight: "10px", marginLeft: "10px" }}
+        >
+          Search
+        </Button>
+      </HeaderCol>
+    </HeaderCol>
   );
 };
 

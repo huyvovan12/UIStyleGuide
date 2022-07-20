@@ -1,53 +1,61 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Row } from "antd";
+import { Col, Row } from "antd";
 import Color from "./pages/Color";
-import Typography from "./pages/Typography";
-import Icon from "./pages/Icon";
 import Component from "./pages/Component";
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import ListItem from "./pages/ListItem";
+import EditItem from "./pages/EditItem";
+import AddItem from "./pages/AddItem";
 
 function App() {
   const routes = [
-    {
-      to: "/typography",
-      component: <Typography />,
-      exact: true,
-    },
-    {
-      to: "/icon",
-      component: <Icon />,
-    },
     {
       to: "/component",
       component: <Component />,
     },
     {
-      to: ["/form", "/"],
+      to: "/form",
       component: <Color />,
+    },
+    {
+      to: ["/", "/list-item"],
+      component: <ListItem />,
       exact: true,
+    },
+    {
+      to: "/edit-item",
+      component: <EditItem />,
+    },
+    {
+      to: "/add-item",
+      component: <AddItem />,
     },
   ];
 
   return (
     <div className="App">
       <Row>
-        <Router>
-          <Header title="Ui Style Guide" />
-          <Switch>
-            {routes.map((route) => {
-              return (
-                <Route
-                  path={route.to}
-                  exact={route.exact}
-                  key={route.component}
-                >
-                  {route.component}
-                </Route>
-              );
-            })}
-          </Switch>
-        </Router>
+        <Header />
+        <Col span={24} style={{ display: "flex" }}>
+          <Sidebar />
+          <Router>
+            <Switch>
+              {routes.map((route) => {
+                return (
+                  <Route
+                    path={route.to}
+                    exact={route.exact}
+                    key={route.component}
+                  >
+                    {route.component}
+                  </Route>
+                );
+              })}
+            </Switch>
+          </Router>
+        </Col>
       </Row>
     </div>
   );
