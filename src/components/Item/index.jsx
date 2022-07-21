@@ -1,4 +1,5 @@
 import { Col, Row, Typography, Space, Divider } from "antd";
+import { formatDescription } from "../../helpers/formatDescription";
 import { Container } from "./styled";
 
 const { Text } = Typography;
@@ -28,10 +29,9 @@ const Item = ({ item }) => {
           </Col>
           <Col span={24}>
             <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-              fugit, dicta doloremque, iste, officiis hic voluptate quis
-              temporibus eos praesentium obcaecati? Quam, consequuntur enim
-              voluptates est dolorum veritatis porro perferendis.
+              {formatDescription(
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur dolorem, magnam aut doloremque quod illum fugiat itaque reiciendis, sed fugit laborum assumenda! A, quasi. Rem provident quae quaerat praesentium cupiditate sdaad asdqwef bdadas."
+              )}
             </Text>
           </Col>
         </Row>

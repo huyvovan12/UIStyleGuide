@@ -5,29 +5,23 @@ const Sidebar = () => {
   return (
     <Col span={5} style={{ background: "#F88F14", height: "100vh" }}>
       <Button
-        style={{
-          borderRadius: "0px",
-          background: "transparent",
-          borderBottom: "2px solid white",
-        }}
+        borderRadius="0px"
+        background="transparent"
+        borderBottom="2px solid white"
       >
         All Task
       </Button>
       <Button
-        style={{
-          borderRadius: "0px",
-          background: "transparent",
-          borderBottom: "2px solid white",
-        }}
+        borderRadius="0px"
+        background="transparent"
+        borderBottom="2px solid white"
       >
         New Task
       </Button>
       <Button
-        style={{
-          borderRadius: "0px",
-          background: "transparent",
-          borderBottom: "2px solid white",
-        }}
+        borderRadius="0px"
+        background="transparent"
+        borderBottom="2px solid white"
       >
         Doing
       </Button>
