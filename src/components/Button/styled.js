@@ -34,6 +34,7 @@ export const ButtonPrimary = styled(ButtonBase)`
     color: #ffffff;
     background: #c20000;
   }
+
   ${({ disabled }) =>
     disabled &&
     `

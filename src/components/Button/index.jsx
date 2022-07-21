@@ -28,6 +28,7 @@ const Button = ({
           {...rest}
         />
       );
+
     default:
       return (
         <ButtonPrimary

@@ -107,9 +107,7 @@ const Color = () => {
                   <br />
                   <Radio.Group
                     options={array}
-                    onChange={(e) =>
-                      setFieldValue("RadioButton", e.target.value)
-                    }
+                    onChange={handleChange("radiobutton")}
                   />
                   {errors.RadioButton && (
                     <ErrorMessage>{errors.RadioButton}</ErrorMessage>
