@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Button as antdButton } from "antd";
 
 export const ButtonBase = styled(antdButton)`
@@ -14,6 +14,21 @@ export const ButtonBase = styled(antdButton)`
     $width &&
     `
       width: ${$width};
+    `}
+   ${({ borderRadius }) =>
+    borderRadius &&
+    css`
+      border-radius: ${borderRadius} !important;
+    `}
+    ${({ background }) =>
+    background &&
+    css`
+      background: ${background} !important;
+    `}
+    ${({ borderBottom }) =>
+    borderBottom &&
+    css`
+      border-bottom: ${borderBottom} !important;
     `}
 `;
 
